@@ -1,0 +1,37 @@
+[tools]
+betterleaks = "latest"
+hk = "2"
+jactionlint = "latest"
+lychee = "latest"
+node = "26"
+"npm:oxfmt" = "0.79.0"
+"npm:oxlint" = "1.94.0"
+osv-scanner = "latest"
+"npm:@commitlint/cli" = "latest"
+"npm:@commitlint/config-conventional" = "latest"
+pkl = "latest"
+rumdl = "latest"
+typos = "latest"
+
+# Задачи проекта живут здесь, Makefile только проксирует make <задача> в mise run.
+# Первая настройка (AGENTS.md) ставит зависимости стека в setup перед hk install
+# и заполняет test.
+[tasks.setup]
+description = "Поставить зависимости и git-хуки"
+run = ["npm ci", "hk install"]
+
+[tasks.test]
+description = "Тесты стенда: собирает A и B и проверяет публикацию, кеш, CORS и откат"
+run = "npm test"
+
+[tasks.check]
+description = "Все проверки, тот же набор, что гоняет CI"
+run = "hk check --all"
+
+[tasks.fix]
+description = "Применить автоисправления"
+run = "hk fix --all"
+
+[tasks.demo]
+description = "Собрать демо для GitHub Pages в dist-demo/, API и конфиг работают в браузере"
+run = ["npx vite build --config vite.demo.config.js", "cp dist-demo/index.html dist-demo/404.html"]

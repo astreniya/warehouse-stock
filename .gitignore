@@ -1,0 +1,8 @@
+.lycheecache
+node_modules/
+dist/
+.state/
+.env.local
+.env.sentry-build-plugin
+published/
+dist-demo/
